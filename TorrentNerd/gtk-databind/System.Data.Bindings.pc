@@ -1,0 +1,9 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib64
+Libraries=/usr/lib64/mono/3.5/System.Data.Bindings.dll /usr/lib64/mono/3.5/gtk-databind-lib.dll
+
+Name: System.Data.Bindings
+Description: System.Data.Bindings - Databindings made easy
+Version: 1.98
+Libs: -r:/usr/lib64/mono/3.5/System.Data.Bindings.dll -r:/usr/lib64/mono/3.5/gtk-databind-lib.dll

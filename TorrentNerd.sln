@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorrentNerd", "TorrentNerd\TorrentNerd.csproj", "{E2738EB0-207D-43BD-9365-27981998A31F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleDownloaderLib", "SubtitleDownloaderLib\SubtitleDownloaderLib.csproj", "{14882879-52F5-4034-87A4-75885203F703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSieveLibrary", "MovieSieveLibrary\MovieSieveLibrary.csproj", "{0A2B5037-45FC-46D7-9EE3-B5A106962ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorrentInfoLib", "TorrentInfoLib\TorrentInfoLib.csproj", "{76B5EB27-15EF-40C8-9D12-0A87317CD161}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A2B5037-45FC-46D7-9EE3-B5A106962ADB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0A2B5037-45FC-46D7-9EE3-B5A106962ADB}.Debug|x86.Build.0 = Debug|Any CPU
+		{0A2B5037-45FC-46D7-9EE3-B5A106962ADB}.Release|x86.ActiveCfg = Release|Any CPU
+		{0A2B5037-45FC-46D7-9EE3-B5A106962ADB}.Release|x86.Build.0 = Release|Any CPU
+		{14882879-52F5-4034-87A4-75885203F703}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14882879-52F5-4034-87A4-75885203F703}.Debug|x86.Build.0 = Debug|Any CPU
+		{14882879-52F5-4034-87A4-75885203F703}.Release|x86.ActiveCfg = Release|Any CPU
+		{14882879-52F5-4034-87A4-75885203F703}.Release|x86.Build.0 = Release|Any CPU
+		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Debug|x86.Build.0 = Debug|Any CPU
+		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Release|x86.ActiveCfg = Release|Any CPU
+		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Release|x86.Build.0 = Release|Any CPU
+		{E2738EB0-207D-43BD-9365-27981998A31F}.Debug|x86.ActiveCfg = Debug|x86
+		{E2738EB0-207D-43BD-9365-27981998A31F}.Debug|x86.Build.0 = Debug|x86
+		{E2738EB0-207D-43BD-9365-27981998A31F}.Release|x86.ActiveCfg = Release|x86
+		{E2738EB0-207D-43BD-9365-27981998A31F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = TorrentNerd\TorrentNerd.csproj
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76B5EB27-15EF-40C8-9D12-0A87317CD161}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TorrentInfoLib</RootNamespace>
+    <AssemblyName>TorrentInfoLib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="TorentInfo.cs" />
+    <Compile Include="Torrent.cs" />
+    <Compile Include="BTEncoding\BEncodedDictionary.cs" />
+    <Compile Include="BTEncoding\BEncodedList.cs" />
+    <Compile Include="BTEncoding\BEncodedNumber.cs" />
+    <Compile Include="BTEncoding\BEncodedString.cs" />
+    <Compile Include="BTEncoding\BEncodingException.cs" />
+    <Compile Include="BTEncoding\IBEncodedValue.cs" />
+    <Compile Include="BTEncoding\RawReader.cs" />
+    <Compile Include="Hashes.cs" />
+    <Compile Include="InfoHash.cs" />
+    <Compile Include="RawTrackerTier.cs" />
+    <Compile Include="TorrentFile.cs" />
+    <Compile Include="BitField.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="RawTrackerTiers.cs" />
+    <Compile Include="TorrentException.cs" />
+    <Compile Include="Check.cs" />
+    <Compile Include="HashAlgoFactory.cs" />
+    <Compile Include="ToolBox.cs" />
+    <Compile Include="UriHelper.cs" />
+    <Compile Include="BTEncoding\IMessage.cs" />
+    <Compile Include="BTEncoding\Message.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="BTEncoding\ChangeLog" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieSieveLibrary\MovieSieveLibrary.csproj">
+      <Project>{0A2B5037-45FC-46D7-9EE3-B5A106962ADB}</Project>
+      <Name>MovieSieveLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
