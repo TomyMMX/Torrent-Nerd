@@ -46,8 +46,6 @@ namespace TorrentNerd
 				
 				imgPoster.Pixbuf = new Gdk.Pixbuf (mystream, 143, 209);
 				
-				
-				
 				tvSubs.AppendColumn ("Name", new Gtk.CellRendererText (), "text", 0);
 				tvSubs.AppendColumn ("Fps", new Gtk.CellRendererText (), "text", 1);
 				tvSubs.AppendColumn ("#CDs", new Gtk.CellRendererText (), "text", 2);
@@ -108,7 +106,11 @@ namespace TorrentNerd
 			} catch {
 			}
 			
-			executeTorrentProgram (path);
+			//executeTorrentProgram (path);
+			//TODO read settings and open correct app
+			TransmissionRPCLib.ControlTransmission ct = new TransmissionRPCLib.ControlTransmission("127.0.0.1", "9091");
+			ct.addTorrent(btnPath.Label, path);
+			
 			this.Respond(ResponseType.Ok);
 		}
 
@@ -157,6 +159,15 @@ namespace TorrentNerd
 			
 			getSubs();
 		}
+		
+		protected virtual void openImdbLink (object sender, System.EventArgs e)
+		{
+			try{
+			System.Diagnostics.Process.Start(btnLink.Label);
+			}
+			catch{}
+		}
+		
 		
 		
 	}

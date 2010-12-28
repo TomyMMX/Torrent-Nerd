@@ -1,0 +1,1398 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+
+<head>
+<title>Movie Catalog: Movies</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script src="moviecat.js" type="text/javascript"></script>
+<link type="text/css" rel="alternate stylesheet" href="black.css" title="black">
+<link type="text/css" rel="stylesheet" href="grey.css" title="grey">
+<link type="text/css" rel="alternate stylesheet" href="old.css" title="old">
+<link type="text/css" rel="alternate stylesheet" href="white.css" title="white">
+<style type=text/css><!--
+span.HOVER_ULN:hover {text-decoration: underline}
+a.HOVER_BOLD:hover {font-weight: bold}
+input[type=text] {font-size: small; height: 1em;}
+input[type=checkbox] {margin: 0px; width:13px; height:13px;}
+input[type=radio] {margin: 0px; width:13px; height:13px;}
+span.MDIRTIME {display: none}
+--></style>
+</head>
+<body bgcolor="lightgrey">
+<form style="position: absolute; top: 2pt; right: 2pt;" name="ThemeForm">Theme:<select name="ThemeList" size="1" onChange="switchTheme(this.form)">
+<option value="black">black</option>
+<option selected value="grey">grey</option>
+<option value="old">old</option>
+<option value="white">white</option>
+</select></form>
+<table><tr><td valign=top>Group:<td>
+<table cellpadding=0 cellspacing=0><tr>
+<td>
+<b>[Movies (37)]</b> &nbsp;
+<td>
+<a href=movies_missing_info.html>Missing Info (31)</a> &nbsp;
+</table>
+</table><br>
+<div class="sort-options">Sort by:
+<a id="SORT_TITLE" href=javascript:sort_title()>Title</a> 
+<a id="SORT_RATING" href=javascript:sort_rating()>Rating</a> 
+<a id="SORT_RUNTIME" href=javascript:sort_runtime()>Runtime</a> 
+<a id="SORT_YEAR" href=javascript:sort_year()>Year</a> 
+<small>
+<a id="SORT_DIRTIME" href=javascript:sort_dirtime()>DirTime</a> 
+</small>
+</div>
+<br class="sort-break">
+<span id=FILTER_HEAD>Filter: <small>
+<i id=STATUS>37 Movies</i> 
+&nbsp; <a href=javascript:filter_reset()>reset</a>
+&nbsp; <a id=SHOW_FILTER1 href=javascript:show_filter(1)>show tags</a>
+&nbsp; <a id=SHOW_FILTER2 href=javascript:show_filter(2)>show genre</a>
+&nbsp; <a id=SHOW_FILTER3 href=javascript:show_filter(3)>more options</a>
+</small></span>
+<form id=FORM_FILTER style='display:inline' onsubmit=do_filter();return(false)>
+<table id=FILTER_TABLE cellspacing=3 cellpadding=0 bgcolor=silver>
+<tr valign=top>
+<td id=HIDE_FILTER1>
+<table id=TAG_TABLE cellspacing=0 cellpadding=0>
+<tr valign=top>
+<td>Tags:&nbsp;<br><small>
+<a href=javascript:tag_all()>all</a><br>
+<a href=javascript:hide_filter(1)>hide</a><br>
+</small></td>
+<td><small>
+<table cellspacing=0 cellpadding=0>
+<tr>
+<td><input type=radio id=TAG_HIDEF_ALL name=TAG_HIDEF value=all checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_HIDEF','ALL')>all</span>&nbsp;
+<td><input type=radio id=TAG_HIDEF_NOT name=TAG_HIDEF value=not onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_HIDEF','NOT')>not</span>&nbsp;
+<td><input type=radio id=TAG_HIDEF_SET name=TAG_HIDEF value=set onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_HIDEF','SET')>HiDef (1)</span>&nbsp;
+</tr>
+<tr>
+<td><input type=radio id=TAG_TV_ALL name=TAG_TV value=all checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_TV','ALL')>all</span>&nbsp;
+<td><input type=radio id=TAG_TV_NOT name=TAG_TV value=not onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_TV','NOT')>not</span>&nbsp;
+<td><input type=radio id=TAG_TV_SET name=TAG_TV value=set onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_TV','SET')>TV (1)</span>&nbsp;
+</tr>
+<tr>
+<td><input type=radio id=TAG_GUESS_ALL name=TAG_GUESS value=all checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_GUESS','ALL')>all</span>&nbsp;
+<td><input type=radio id=TAG_GUESS_NOT name=TAG_GUESS value=not onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_GUESS','NOT')>not</span>&nbsp;
+<td><input type=radio id=TAG_GUESS_SET name=TAG_GUESS value=set onclick=do_filter()><span class=HOVER_ULN onclick=tag_set('TAG_GUESS','SET')>Guess (25)</span>&nbsp;
+</tr>
+</table>
+</small></td>
+<td style='width:1em'></td>
+</tr></table></td>
+<td id=HIDE_FILTER2>
+<table id=GENRE_TABLE cellspacing=0 cellpadding=0>
+<tr valign=top>
+<td>Genre:&nbsp;<br><small>
+<a href=javascript:genre_all()>all</a><br>
+<a href=javascript:genre_none()>none</a><br>
+<a href=javascript:hide_filter(2)>hide</a><br>
+</small></td>
+<td><small>
+<input type=checkbox id=G_ACTION checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_ACTION')>Action</span>&nbsp;<br>
+<input type=checkbox id=G_ADVENTURE checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_ADVENTURE')>Adventure</span>&nbsp;<br>
+<input type=checkbox id=G_ANIMATION checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_ANIMATION')>Animation</span>&nbsp;<br>
+<input type=checkbox id=G_BIOGRAPHY checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_BIOGRAPHY')>Biography</span>&nbsp;<br>
+<input type=checkbox id=G_COMEDY checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_COMEDY')>Comedy</span>&nbsp;<br>
+</small></td><td><small>
+<input type=checkbox id=G_CRIME checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_CRIME')>Crime</span>&nbsp;<br>
+<input type=checkbox id=G_DOCUMENTARY checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_DOCUMENTARY')>Documentary</span>&nbsp;<br>
+<input type=checkbox id=G_DRAMA checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_DRAMA')>Drama</span>&nbsp;<br>
+<input type=checkbox id=G_FAMILY checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_FAMILY')>Family</span>&nbsp;<br>
+<input type=checkbox id=G_FANTASY checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_FANTASY')>Fantasy</span>&nbsp;<br>
+</small></td><td><small>
+<input type=checkbox id=G_FILM-NOIR checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_FILM-NOIR')>Film-Noir</span>&nbsp;<br>
+<input type=checkbox id=G_HORROR checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_HORROR')>Horror</span>&nbsp;<br>
+<input type=checkbox id=G_MUSIC checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_MUSIC')>Music</span>&nbsp;<br>
+<input type=checkbox id=G_MUSICAL checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_MUSICAL')>Musical</span>&nbsp;<br>
+<input type=checkbox id=G_MYSTERY checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_MYSTERY')>Mystery</span>&nbsp;<br>
+</small></td><td><small>
+<input type=checkbox id=G_ROMANCE checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_ROMANCE')>Romance</span>&nbsp;<br>
+<input type=checkbox id=G_SCI-FI checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_SCI-FI')>Sci-Fi</span>&nbsp;<br>
+<input type=checkbox id=G_THRILLER checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_THRILLER')>Thriller</span>&nbsp;<br>
+<input type=checkbox id=G_WAR checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_WAR')>War</span>&nbsp;<br>
+<input type=checkbox id=G_WESTERN checked=checked onclick=do_filter()><span class=HOVER_ULN onclick=genre_one('G_WESTERN')>Western</span>&nbsp;<br>
+</small></td><td><small>
+</small></td>
+<td style='width:1em'></td>
+</tr></table></td>
+<td id=HIDE_FILTER3>
+<table id=RANGE_TABLE cellspacing=0 cellpadding=0>
+<tr><td>Year: <td>
+<input type=text id=YMIN value=0 maxlength=5 size=2 onkeyup=numbersOnly(this) onchange=do_filter()> - 
+<input type=text id=YMAX value=2010 maxlength=5 size=2 onkeyup=numbersOnly(this) onchange=do_filter()></tr>
+<tr><td>Rating: <td>
+<input type=text id=RMIN value=0 maxlength=5 size=2 onkeyup=numbersOnly(this) onchange=do_filter()> - 
+<input type=text id=RMAX value=10 maxlength=5 size=2 onkeyup=numbersOnly(this) onchange=do_filter()></tr>
+<tr><td>Runtime: <td>
+<input type=text id=TMIN value=0 maxlength=5 size=2 onkeyup=numbersOnly(this) onchange=do_filter()> - 
+<input type=text id=TMAX value=200 maxlength=5 size=2 onkeyup=numbersOnly(this) onchange=do_filter()></tr>
+<tr><td colspan=2><small>
+&nbsp; <a href=javascript:hide_filter(3)>hide</a>
+</small></tr></table></td>
+</tr></table>
+</form><br>
+<script type="text/javascript">init_filter();</script>
+<table id=MTABLE cellspacing=0 cellpadding=0>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0870984.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0870984>Antikrist </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.7</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>108</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+A couple lose their young son when he falls out the window while they have sex in the other room. The mother&#x27;s grief consigns her to hospital, but her therapist husband brings her home intent on treating her depression himself. To confront her fears they go to stay at their remote cabin in the woods, &#x22;Eden&#x22;, where something untold happened the previous summer. Told in four chapters with a prologue and epilogue, the film details acts of lustful cruelty as the man and woman unfold the darker side of nature outside and within.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Antichrist.2009.DVDSCR.XviD-iLG">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Antichrist.2009.DVDSCR.XviD-iLG/<wbr></a>
+<span class=MDIRTIME>1275145278</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Antikrist+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Antikrist+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Antikrist+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Antikrist+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0870984">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0870984/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Antikrist+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Antikrist+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0499549.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0499549>Avatar </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.3</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>162</b> min &nbsp;&nbsp; <i class=MGENRE>(Action / Adventure / Fantasy / Sci-Fi)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+When his brother is killed in a robbery, paraplegic Marine Jake Sully decides to take his place in a mission on the distant world of Pandora. There he learns of greedy corporate figurehead Parker Selfridge&#x27;s intentions of driving off the native humanoid &#x22;Na&#x27;vi&#x22; in order to mine for the precious material scattered throughout their rich woodland. In exchange for the spinal surgery that will fix his legs, Jake gathers intel for the cooperating military unit spearheaded by gung-ho Colonel Quaritch, while simultaneously attempting to infiltrate the Na&#x27;vi people with the use of an &#x22;avatar&#x22; identity. While Jake begins to bond with the native tribe and quickly falls in love with the beautiful alien Neytiri, the restless Colonel moves forward with his ruthless extermination tactics, forcing the soldier to take a stand - and fight back in an epic battle for the fate of Pandora.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Sci-fi/Avatar.2009.SLOSubs.DVDSCR.XviD-metalcamp">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Sci-fi/<wbr>Avatar.2009.SLOSubs.DVDSCR.XviD-metalcamp/<wbr></a>
+<span class=MDIRTIME>1284244820</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Avatar+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Avatar+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Avatar+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Avatar+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0499549">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0499549/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Avatar+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Avatar+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0947798.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0947798>Black Swan </a></b>
+ (<span class=MYEAR>2010</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.8</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>108</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Nina (Portman) is a ballerina in a New York City ballet company whose life, like all those in her profession, is completely consumed with dance. She lives with her obsessive former ballerina mother Erica (Hershey) who exerts a suffocating control over her. When artistic director Thomas Leroy (Cassel) decides to replace prima ballerina Beth MacIntyre (Ryder) for the opening production of their new season, Swan Lake, Nina is his first choice. But Nina has competition: a new dancer, Lily (Kunis), who impresses Leroy as well. Swan Lake requires a dancer who can play both the White Swan with innocence and grace, and the Black Swan, who represents guile and sensuality. Nina fits the White Swan role perfectly but Lily is the personification of the Black Swan. As the two young dancers expand their rivalry into a twisted friendship, Nina begins to get more in touch with her dark side - a recklessness that threatens to destroy her.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/drama - thriller/Black.Swan.2010.DVDSCR.XviD.AC3-Rx">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>drama - thriller/<wbr>Black.Swan.2010.DVDSCR.XviD.AC3-Rx/<wbr></a>
+<span class=MDIRTIME>1293447694</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Black+Swan+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Black+Swan+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Black+Swan+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Black+Swan+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0947798">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0947798/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Black+Swan+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Black+Swan+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1462758.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1462758>Buried </a></b>
+ (<span class=MYEAR>2010</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.5</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>95</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama / Mystery / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Waking groggy in pitch darkness, Paul Conroy, an American truck driver working as a contractor in Iraq in 2006, slowly realizes he is trapped inside a wooden coffin, buried alive. With his cigarette lighter, he can see the trap he is in, and he quickly realizes that there&#x27;s not enough air for him to live long. He finds within the coffin a working cellphone, which allows him contact with the outside world. But the outside world proves not to be very helpful at finding a man buried in a box in the middle of the Iraqi desert. Paul must rely on his best resource--himself.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/drama - thriller/Buried 2010 480p BDRiP XViD AC3-HiTM4N">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>drama - thriller/<wbr>Buried 2010 480p BDRiP XViD AC3-HiTM4N</a>
+<span class=MDIRTIME>1293444421</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Buried+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Buried+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Buried+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Buried+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1462758">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1462758/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Buried+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Buried+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1263670.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1263670>Crazy Heart </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.4</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>112</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama / Music / Romance)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Bad Blake is a broken-down, hard-living country music singer who&#x27;s had way too many marriages, far too many years on the road and one too many drinks way too many times. And yet, Bad can&#x27;t help but reach for salvation with the help of Jean, a journalist who discovers the real man behind the musician.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<br><b>(1)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Crazy.Heart.DVDSCREENER.XviD-MENTiON">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Crazy.Heart.DVDSCREENER.XviD-MENTiON</a>
+<br><b>(2)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Crazy.Heart.DVDSCREENER.XviD-MENTiON/CD1">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Crazy.Heart.DVDSCREENER.XviD-MENTiON/<wbr>CD1</a>
+<br><b>(3)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Crazy.Heart.DVDSCREENER.XviD-MENTiON/CD2">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Crazy.Heart.DVDSCREENER.XviD-MENTiON/<wbr>CD2</a>
+<span class=MDIRTIME>1268044434</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Crazy+Heart+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Crazy+Heart+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Crazy+Heart+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Crazy+Heart+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1263670">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1263670/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Crazy+Heart+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Crazy+Heart+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1323594.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1323594>Despicable Me </a></b>
+ (<span class=MYEAR>2010</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.6</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>95</b> min &nbsp;&nbsp; <i class=MGENRE>(Animation / Comedy / Family)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In a happy suburban neighborhood surrounded by white picket fences with flowering rose bushes, sits a black house with a dead lawn. Unbeknownst to the neighbors, hidden beneath this home is a vast secret hideout. Surrounded by a small army of minions, we discover Gru, planning the biggest heist in the history of the world. He is going to steal the moon. (Yes, the moon!) Gru delights in all things wicked. Armed with his arsenal of shrink rays, freeze rays, and battle-ready vehicles for land and air, he vanquishes all who stand in his way. Until the day he encounters the immense will of three little orphaned girls who look at him and see something that no one else has ever seen: a potential Dad. The world&#x27;s greatest villain has just met his greatest challenge: three little girls named Margo, Edith and Agnes.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/risani, animirani/Despicable Me 2010 DVDRip XviD AC3-LEGi0N">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>risani, animirani/<wbr>Despicable Me 2010 DVDRip XviD AC3-LEGi0N</a>
+<span class=MDIRTIME>1291472064</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Despicable+Me+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Despicable+Me+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Despicable+Me+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Despicable+Me+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1323594">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1323594/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Despicable+Me+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Despicable+Me+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1379182.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1379182>Dogtooth </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.4</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>94</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Three teenagers are confined to an isolated country estate that could very well be on another planet. The trio spend their days listening to endless homemade tapes that teach them a whole new vocabulary. Any word that comes from beyond their family abode is instantly assigned a new meaning. Hence &#x27;the sea&#x27; refers to a large armchair and &#x27;zombies&#x27; are little yellow flowers. Having invented a brother whom they claim to have ostracized for his disobedience, the uber-controlling parents terrorize their offspring into submission. The father is the only family member who can leave the manicured lawns of their self-inflicted exile, earning their keep by managing a nearby factory, while the only outsider allowed on the premises is his colleague Christina, who is paid to relieve the son of his male urges. Tired of these dutiful acts of carnality, Christina enlists the elder daughter for some girl-on-girl action...
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Kynodontas (2009) DVDRip XviD DivXNL-Team(dutch subs NL)">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Kynodontas (2009) DVDRip XviD DivXNL-Team(dutch subs NL)/<wbr></a>
+<span class=MDIRTIME>1290622450</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Dogtooth+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Dogtooth+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Dogtooth+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Dogtooth+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1379182">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1379182/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Dogtooth+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Dogtooth+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0809951.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0809951>Empties </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.3</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>100</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+A comic love story about a man who refuses to accept that old age is empty of love, meaning and value to society.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Vratne Lahve [2007] [DVDRip.XviD-LAHVE] [Lektor PL] [Arx]">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Vratne Lahve [2007] [DVDRip.XviD-LAHVE] [Lektor PL] [Arx]/<wbr></a>
+<span class=MDIRTIME>1289941430</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Empties+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Empties+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Empties+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Empties+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0809951">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0809951/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Empties+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Empties+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0058083.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0058083>Fail-Safe </a></b>
+ (<span class=MYEAR>1964</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.0</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>112</b> min &nbsp;&nbsp; <i class=MGENRE>(Adventure / Drama / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+A series of human and computer errors sends a squadron of American B-58 bombers to nuke Moscow. The President, in order to convince the Soviets that this is a mistake, orders the Strategic Air Command to help the Soviets stop them.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/drama - thriller/Fail-Safe (1964)">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>drama - thriller/<wbr>Fail-Safe (1964)/<wbr></a>
+<span class=MDIRTIME>1284245072</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Fail-Safe+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Fail-Safe+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Fail-Safe+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Fail-Safe+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0058083">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0058083/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Fail-Safe+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Fail-Safe+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0910554.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0910554>Frequently Asked Questions About Time Travel </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.2</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>83</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Sci-Fi)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+The script, written by Jamie Mathieson, follows three social outcasts -- two geeks and a cynic -- as they attempt to navigate a time-travel conundrum in the middle of a British pub. Faris plays a girl from the future who sets the adventure in motion.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/Komedija/Frequently.Asked.Questions.About.Time.Travel.DVDRip.XviD-DiVERSE">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Komedija/<wbr>Frequently.Asked.Questions.About.Time.Travel.DVDRip.XviD-DiVERSE</a>
+<span class=MDIRTIME>1284239198</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Frequently+Asked+Questions+About+Time+Travel+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Frequently+Asked+Questions+About+Time+Travel+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Frequently+Asked+Questions+About+Time+Travel+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Frequently+Asked+Questions+About+Time+Travel+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0910554">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0910554/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Frequently+Asked+Questions+About+Time+Travel+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Frequently+Asked+Questions+About+Time+Travel+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1179034.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1179034>From Paris with Love </a></b>
+ (<span class=MYEAR>2010</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.4</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>92</b> min &nbsp;&nbsp; <i class=MGENRE>(Action / Crime / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+James Reece is an ambitious aide to the U.S. Ambassador in Paris, doing little jobs for the CIA and hoping to get into black ops. On the night he and his girlfriend, Caroline, become engaged, he&#x27;s told to pick up Charlie Wax at Orly. Charlie is an unorthodox government employee - large, bald and bearded, foul-mouthed and eccentric. Charlie immediately takes James on a wild ride of murder and mayhem, through ethnic enclaves. As bodies pile up, the purpose remains opaque to James. Caroline, unhappy that James has been out of touch for a day, tells him to bring Charlie for dinner. Charlie can be charming - where will it lead? Does the chess-playing James have what it takes?
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/Komedija/Frequently.Asked.Questions.About.Time.Travel.DVDRip.XviD-DiVERSE/From.Paris.with.Love.R5.LINE.XviD-MENTiON">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Komedija/<wbr>Frequently.Asked.Questions.About.Time.Travel.DVDRip.XviD-DiVERSE/<wbr>From.Paris.with.Love.R5.LINE.XviD-MENTiON</a>
+<span class=MDIRTIME>1267107774</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-From+Paris+with+Love+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=From+Paris+with+Love+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=From+Paris+with+Love+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/From+Paris+with+Love+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1179034">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1179034/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=From+Paris+with+Love+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=From+Paris+with+Love+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0452623.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0452623>Gone Baby Gone </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.9</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>114</b> min &nbsp;&nbsp; <i class=MGENRE>(Crime / Drama / Mystery / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+When 4 year old Amanda McCready disappears from her home and the police make little headway in solving the case, the girl&#x27;s aunt Beatrice McCready hires two private detectives Patrick Kenzie and Angie Gennaro. The detective freely admit that they have little experience with this type of case, but the family wants them for two reasons - they&#x27;re not cops and they know the tough neighborhood in which they all live. As the case progresses, Kenzie and Gennaro face drug dealers, gangs and pedophiles. When they finally solve the case, they are faced with a moral dilemma that tears them apart.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Gone.Baby.Gone.2007.SLOSUB.BRRip.AC3.XviD-SAvAGE">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Gone.Baby.Gone.2007.SLOSUB.BRRip.AC3.XviD-SAvAGE/<wbr></a>
+<span class=MDIRTIME>1258640750</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Gone+Baby+Gone+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Gone+Baby+Gone+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Gone+Baby+Gone+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Gone+Baby+Gone+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0452623">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0452623/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Gone+Baby+Gone+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Gone+Baby+Gone+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0113243.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0113243>Hackers </a></b>
+ (<span class=MYEAR>1995</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>5.8</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>107</b> min &nbsp;&nbsp; <i class=MGENRE>(Action / Crime / Drama / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+A young boy is arrested by the US Secret Service for writing a computer virus and is banned from using a computer until his 18th birthday. Years later, he and his new-found friends discover a plot to unleash a dangerous computer virus, but they must use their computer skills to find the evidence while being pursued by the Secret Service and the evil computer genius behind the virus.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Fantastika/Hackers.1995.DVDRip.Xvid.iNTERNAL-Sh0T">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Fantastika/<wbr>Hackers.1995.DVDRip.Xvid.iNTERNAL-Sh0T/<wbr></a>
+<span class=MDIRTIME>1284245114</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Hackers+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Hackers+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Hackers+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Hackers+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0113243">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0113243/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Hackers+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Hackers+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0032599.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0032599>His Girl Friday </a></b>
+ (<span class=MYEAR>1940</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.1</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>92</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Drama / Romance)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Hildy Johnson has divorced Walter Burns and visits his office to tell him that she is engaged to another man and that they are going to get married the day after. Walter Burns can&#x27;t let that happen and frames the other man, Bruce Baldwin, for a lot of stuff getting him into trouble all the time, while he tries to steer Hildy back into her old job as his employee (editor of his newspaper).
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/western/Howard Hawks - His Girl Friday (1940)">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>western/<wbr>Howard Hawks - His Girl Friday (1940)/<wbr></a>
+<span class=MDIRTIME>1261534704</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-His+Girl+Friday+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=His+Girl+Friday+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=His+Girl+Friday+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/His+Girl+Friday+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0032599">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0032599/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=His+Girl+Friday+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=His+Girl+Friday+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1176252.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1176252>Hunger </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>5.4</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>101</b> min &nbsp;&nbsp; <i class=MGENRE>(Horror / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Hunger is a dark exploration into the breakdown of humanity. How far would you go to survive in the most extreme of circumstances? Five strangers awaken to find themselves trapped in an underground dungeon. They soon realize they are the subjects of one man&#x27;s sadistic experiment to test the depths of a human being&#x27;s will to survive. As the days go by with no means of escape, their hunger increases as their humanity fades away.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Hunger.2009.DVDRiP.XviD-QCF">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Hunger.2009.DVDRiP.XviD-QCF</a>
+<span class=MDIRTIME>1293455961</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Hunger+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Hunger+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Hunger+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Hunger+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1176252">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1176252/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Hunger+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Hunger+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0368794.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0368794>I&#x27;m Not There. </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.0</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>135</b> min &nbsp;&nbsp; <i class=MGENRE>(Biography / Drama / Music)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Six incarnations of Bob Dylan: an actor, a folk singer, an electrified troubadour, Rimbaud, Billy the Kid, and Woody Guthrie. Put Dylan&#x27;s music behind their adventures, soliloquies, interviews, marriage, and infidelity. Recreate 1960s documentaries in black and white. Put each at a crossroads, the artist becoming someone else. Jack, the son of Ramblin&#x27; Jack Elliott, finds Jesus; handsome Robbie falls in love then abandons Claire. Woody, a lad escaped from foster care, hobos the U.S. singing; Billy awakes in a valley threatened by a six-lane highway; Rimbaud talks. Jude, booed at Newport when he goes electric, fences with reporters, pundits, and fans. He won&#x27;t be classified.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<br><b>(1)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Musical/Im.Not.There.LIMITED.DVDRip.XviD-DMT">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Musical/<wbr>Im.Not.There.LIMITED.DVDRip.XviD-DMT</a>
+<br><b>(2)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Musical/Im.Not.There.LIMITED.DVDRip.XviD-DMT/CD1">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Musical/<wbr>Im.Not.There.LIMITED.DVDRip.XviD-DMT/<wbr>CD1</a>
+<br><b>(3)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Musical/Im.Not.There.LIMITED.DVDRip.XviD-DMT/CD2">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Musical/<wbr>Im.Not.There.LIMITED.DVDRip.XviD-DMT/<wbr>CD2</a>
+<span class=MDIRTIME>1204035602</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-I&#x27;m+Not+There.+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=I&#x27;m+Not+There.+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=I&#x27;m+Not+There.+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/I&#x27;m+Not+There.+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0368794">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0368794/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=I&#x27;m+Not+There.+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=I&#x27;m+Not+There.+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0478134.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0478134>In the Valley of Elah </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.4</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>121</b> min &nbsp;&nbsp; <i class=MGENRE>(Crime / Drama / Mystery / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In Monroe, Tennessee, Hank Deerfield, an aging warrior, gets a call that his son, just back from 18 months&#x27; fighting in Iraq, is missing from his base. Hank drives to Fort Rudd, New Mexico, to search. Within a day, the charred and dismembered body of his son is found on the outskirts of town. Deerfield pushes himself into the investigation, marked by jurisdictional antagonism between the Army and local police. Working mostly with a new detective, Emily Sanders, Hank seems to close in on what happened. Major smuggling? A drug deal gone awry? Credit card slips, some photographs, and video clips from Iraq may hold the key. If Hank gets to the truth, what will it tell him?
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess HiDef</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/In.the.Valley.of.Elah.720p.Bluray.x264-Chakra">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>In.the.Valley.of.Elah.720p.Bluray.x264-Chakra/<wbr></a>
+<span class=MDIRTIME>1202567486</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-In+the+Valley+of+Elah+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=In+the+Valley+of+Elah+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=In+the+Valley+of+Elah+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/In+the+Valley+of+Elah+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0478134">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0478134/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=In+the+Valley+of+Elah+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=In+the+Valley+of+Elah+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0116922.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0116922>Izgubljena cesta </a></b>
+ (<span class=MYEAR>1997</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.6</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>134</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama / Horror / Mystery / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Fred Madison, a saxophonist, is accused under mysterious circumstances of murdering his wife Renee. On death row, he inexplicably morphs into a young man named Pete Dayton, leading a completely different life. When Pete is released, his and Fred&#x27;s paths begin to cross in a surreal, suspenseful web of intrigue, orchestrated by a shady gangster boss named Dick Laurent.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Fantastika/Lost.Highway.1997.DVDRip.XviD-UnSeeN">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Fantastika/<wbr>Lost.Highway.1997.DVDRip.XviD-UnSeeN/<wbr></a>
+<span class=MDIRTIME>1284245546</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Izgubljena+cesta+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Izgubljena+cesta+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Izgubljena+cesta+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Izgubljena+cesta+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0116922">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0116922/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Izgubljena+cesta+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Izgubljena+cesta+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0040506.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0040506>Key Largo </a></b>
+ (<span class=MYEAR>1948</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.0</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>100</b> min &nbsp;&nbsp; <i class=MGENRE>(Crime / Drama / Film-Noir / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Frank McCloud travels to a run-down hotel on Key Largo to honor the memory of a friend who died bravely in his unit during WW II. His friend&#x27;s widow, Nora Temple, and wheelchair bound father, James Temple manage the hotel and receive him warmly, but the three of them soon find themselves virtual prisoners when the hotel is taken over by a mob of gangsters led by Johnny Rocco who hole up there to await the passing of a hurricane. Mr. Temple strongly reviles Rocco but due to his infirmities can only confront him verbally. Having become disillusioned by the violence of war, Frank is reluctant to act, but Rocco&#x27;s demeaning treatment of his alcoholic moll, Gaye Dawn, and his complicity in the deaths of some innocent Seminole Indians and a deputy sheriff start to motivate McCloud to overcome his Hamlet-like inaction.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama - crime/Key Largo 1948 PAL/VIDEO_TS">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama - crime/<wbr>Key Largo 1948 PAL/<wbr>VIDEO_TS/<wbr></a>
+<span class=MDIRTIME>1259297620</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Key+Largo+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Key+Largo+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Key+Largo+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Key+Largo+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0040506">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0040506/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Key+Largo+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Key+Largo+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0808357.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0808357>Lust, Caution </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.6</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>157</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama / Romance / Thriller / War)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Frustrated in his attempts to assassinate Yee, who is an important official in Japanese-ruled Shanghai, Old Wu, who has lost his wife and two sons as well as two women who had attempted to seduce Yee, now recruits Kuang, Mai Tai Tai, and their troupe of drama students from Hong Kong University in yet another attempt to do away with Yee. Mai Tai Tai is chosen to befriend Yee, which she does by posing as the wife of Mak, befriending Yee&#x27;s wife and her female friends, and then eventually befriending Yee himself. Even though both get together, they do end up going separate ways, only to meet again four years later. This time Mai is all set to entrap Yee at Chandni Chowk Jewellers which is owned by an East Indian man named Khalid Saiduddin. The question does remain: Will she and her troupe succeed?
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama - romantika/Lust, Caution-2007-Ang Lee">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama - romantika/<wbr>Lust, Caution-2007-Ang Lee/<wbr></a>
+<span class=MDIRTIME>1202037876</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Lust,+Caution+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Lust,+Caution+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Lust,+Caution+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Lust,+Caution+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0808357">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0808357/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Lust,+Caution+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Lust,+Caution+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0985694.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0985694>Maceta </a></b>
+ (<span class=MYEAR>2010</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.3</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>105</b> min &nbsp;&nbsp; <i class=MGENRE>(Action / Comedy / Crime / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+The highly skilled Federale Machete is hired by some unsavory types to assassinate a senator. But just as he&#x27;s about to take the shot, he notices someone aiming at him and realizes he&#x27;s been set up. He barely survives the sniper&#x27;s bullet, and is soon out for revenge on his former employers, with the reluctant assistance of his brother Cheech Marin, who has become a priest and taken a vow of nonviolence. If you hire him to take out the bad guys, make sure the bad guys aren&#x27;t you!
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Akcija/Machete.2010.R5.LiNE.XviD-ViSiON">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Akcija/<wbr>Machete.2010.R5.LiNE.XviD-ViSiON/<wbr></a>
+<span class=MDIRTIME>1287141456</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Maceta+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Maceta+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Maceta+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Maceta+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0985694">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0985694/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Maceta+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Maceta+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0795421.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0795421>Mamma Mia! </a></b>
+ (<span class=MYEAR>2008</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.5</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>108</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Musical / Romance)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Set on a colorful Greek island, the plot serves as a background for a wealth of ABBA songs. A young woman about to be married discovers that any one of three men could be her father. She invites all three to the wedding without telling her mother, Donna, who was once the lead singer of Donna and the Dynamos. In the meantime, Donna has invited her backup singers, Rosie and Tanya.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Musical/Mamma.Mia.2008.SLOSubs.DVDRip.XviD-DrSi">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Musical/<wbr>Mamma.Mia.2008.SLOSubs.DVDRip.XviD-DrSi/<wbr></a>
+<span class=MDIRTIME>1256675090</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Mamma+Mia!+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Mamma+Mia!+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Mamma+Mia!+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Mamma+Mia!+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0795421">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0795421/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Mamma+Mia!+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Mamma+Mia!+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0074958.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0074958>Network </a></b>
+ (<span class=MYEAR>1976</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.1</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>121</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In 1975 terrorist violence is the stuff of network nightly news programming and the corporate structure of the UBS television network is changing. Meanwhile, Howard Beale, the aging UBS news anchor, has lost his once strong ratings share and so the network fires him. Beale reacts in an unexpected way. We then see how this affects the fortunes of Beale, his coworkers (Max Schumacher and Diana Christensen), and the network.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Network">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Network/<wbr>Network.1976.DVDrip.XViD.avi</a>
+<span class=MDIRTIME>1204049766</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Network+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Network+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Network+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Network+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0074958">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0074958/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Network+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Network+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0929632.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0929632>Precious </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.5</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>109</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Claireece Precious Jones endures unimaginable hardships in her young life. Abused by her mother, raped by her father, she grows up poor, angry, illiterate, fat, unloved and generally unnoticed. So what better way to learn about her than through her own, halting dialect.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Precious.DVDSCR.XviD-DEViSE">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Precious.DVDSCR.XviD-DEViSE/<wbr>Precious.Based.on.the.Novel.Push.by.Sapphire.2009.BDRip.XviD-Larceny.avi</a>
+<span class=MDIRTIME>1259148906</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Precious+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Precious+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Precious+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Precious+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0929632">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0929632/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Precious+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Precious+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0390384.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0390384>Primer </a></b>
+ (<span class=MYEAR>2004</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.9</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>77</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama / Thriller / Sci-Fi)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+At night and on weekends, four men in a suburban garage have built a cottage industry of error-checking devices. But, they know that there is something more. There is some idea, some mechanism, some accidental side effect that is standing between them and a pure leap of innovation. And so, through trial and error they are building the device that is missing most. However, two of these men find the device and immediately realize that it is too valuable to market. The limit of their trust in each other is strained when they are faced with the question, If you always want what you can&#x27;t have, what do you want when you can have anything?
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Sci-fi/Primer (2004)">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Sci-fi/<wbr>Primer (2004)/<wbr></a>
+<span class=MDIRTIME>1284280762</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Primer+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Primer+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Primer+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Primer+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0390384">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0390384/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Primer+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Primer+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0960790.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0960790>Rabbit Without Ears </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.8</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>116</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Romance)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Gossip-columnist Ludo finds himself sentenced to three-hundred hours of community service after he literally crashes a private celebrity party. The work is at a children&#x27;s day-centre and while the job&#x27;s fine it is his bad luck that the person in charge is a woman whom he used to play endless practical jokes on when they were at school; she hasn&#x27;t forgotten and is prepared to use her new-found power to get her own back. She finds however that, like the children, she&#x27;s warming to him. If only the court injunction had stopped his womanising too.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama - romantika/Rabbit Without Ears (2007)">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama - romantika/<wbr>Rabbit Without Ears (2007)/<wbr></a>
+<span class=MDIRTIME>1284280778</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Rabbit+Without+Ears+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Rabbit+Without+Ears+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Rabbit+Without+Ears+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Rabbit+Without+Ears+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0960790">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0960790/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Rabbit+Without+Ears+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Rabbit+Without+Ears+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1245526.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1245526>Red </a></b>
+ (<span class=MYEAR>2010</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.2</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>111</b> min &nbsp;&nbsp; <i class=MGENRE>(Action / Comedy / Crime)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+When his idyllic life is threatened by a high-tech assassin, former black-ops agent Frank Moses reassembles his old team in a last ditch effort to survive.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/Akcija/Red 2010 DVDSCR XviD-LTRG">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Akcija/<wbr>Red 2010 DVDSCR XviD-LTRG</a>
+<span class=MDIRTIME>1293388012</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Red+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Red+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Red+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Red+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1245526">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1245526/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Red+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Red+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0053221.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0053221>Rio Bravo </a></b>
+ (<span class=MYEAR>1959</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.1</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>141</b> min &nbsp;&nbsp; <i class=MGENRE>(Western / Romance / Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+A small-town sheriff in the American West enlists the help of a cripple, a drunk, and a young gunfighter in his efforts to hold in jail the brother of the local bad guy.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/western/Howard Hawks - Rio Bravo [1959]">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>western/<wbr>Howard Hawks - Rio Bravo [1959]/<wbr></a>
+<span class=MDIRTIME>1284245202</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Rio+Bravo+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Rio+Bravo+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Rio+Bravo+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Rio+Bravo+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0053221">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0053221/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Rio+Bravo+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Rio+Bravo+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1560169.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1560169>Robin Williams: Weapons of Self Destruction </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i>TV </i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.5</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>?</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In this comedy special taped at DAR Constitution Hall, his first solo special on the network in seven years, Williams covers such topics global warming, sex and politics, the state of health care in the country (suggesting a cash for clunkers program for elderly relatives, among other things), drugs - recreational and otherwise - and more personal topics, including his recent heart surgery.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess TV</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Komedija/Robin.Williams.Weapons.of.Self.Destruction.2009.DVDRip.XviD-VH-PROD">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Komedija/<wbr>Robin.Williams.Weapons.of.Self.Destruction.2009.DVDRip.XviD-VH-PROD/<wbr></a>
+<span class=MDIRTIME>1270119944</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Robin+Williams:+Weapons+of+Self+Destruction+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Robin+Williams:+Weapons+of+Self+Destruction+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Robin+Williams:+Weapons+of+Self+Destruction+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Robin+Williams:+Weapons+of+Self+Destruction+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1560169">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1560169/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Robin+Williams:+Weapons+of+Self+Destruction+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Robin+Williams:+Weapons+of+Self+Destruction+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1247692.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1247692>Shrink </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.7</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>104</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In Hollywood, people in need revolve around Dr. Henry Carter, a shrink: Jack, an aging star wants permission to cheat on his wife; Shamus is a director who&#x27;s a cokehead; Patrick is a high-powered germophobic producer; Jeremy is a young writer looking for a break; Jemma, a high-school student, is skipping school; and Kate is an actress facing her mid-30s. Henry&#x27;s wife recently died; he&#x27;s grieving, blaming himself, smoking lots of pot. Henry&#x27;s friends try an intervention; someone steals a patient&#x27;s file from Henry; Patrick&#x27;s assistant, the pregnant Daisy, sees promise in Jeremy&#x27;s work; and, Jesus, Henry&#x27;s drug dealer, sells him some potent weed. Can anything good come of this?
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/Drama/Shrink.2009.LiMiTED.DVDRiP.XViD">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>Shrink.2009.LiMiTED.DVDRiP.XViD</a>
+<span class=MDIRTIME>1293450399</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Shrink+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Shrink+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Shrink+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Shrink+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1247692">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1247692/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Shrink+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Shrink+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0069293.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0069293>Solyaris </a></b>
+ (<span class=MYEAR>1972</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.0</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>165</b> min &nbsp;&nbsp; <i class=MGENRE>(Adventure / Drama / Mystery / Romance / Sci-Fi)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+The Solaris mission has established a base on a planet that appears to host some kind of intelligence, but the details are hazy and very secret. After the mysterious demise of one of the three scientists on the base, the main character is sent out to replace him. He finds the station run-down and the two remaining scientists cold and secretive. When he also encounters his wife who has been dead for seven years, he begins to appreciate the baffling nature of the alien intelligence.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<br><b>(1)</b> 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Sci-fi/Solaris">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Sci-fi/<wbr>Solaris/<wbr>Solaris 1972 DVDRip KVCD Brady(TUS Release).bin</a>
+<br><b>(2)</b> 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Sci-fi/Solaris">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Sci-fi/<wbr>Solaris/<wbr>Solaris 1972 DVDRip KVCD Brady(TUS Release).cue</a>
+<span class=MDIRTIME>1177933610</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Solyaris+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Solyaris+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Solyaris+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Solyaris+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0069293">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0069293/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Solyaris+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Solyaris+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0057490.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0057490>The Servant </a></b>
+ (<span class=MYEAR>1963</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.9</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>112</b> min &nbsp;&nbsp; <i class=MGENRE>(Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+The aristocratic Tony moves to London and hires the servant Hugo Barrett for all services at home. Barrett seems to be a loyal and competent employee, but Tony&#x27;s girlfriend Susan does not like him and asks Tony to send him away. When Barrett brings his sister Vera to work and live in the house, Tony has a brief hidden affair with her. After traveling with Susan for spending a couple of days in a friend&#x27;s house outside London, the couple unexpectedly returns and finds Barrett and Vera, who are actually lovers, in Tony&#x27;s room. They are fired and Susan breaks with Tony. Later, Tony meets Barrett alone in a pub and hires him back, and Barrett imposes his real dark intentions in the house, turning the table and switching position with his master.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<br><b>(1)</b> 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/The Servant">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>The Servant/<wbr>The.Servant.1963.DVDRip.XviD.AC3.avi</a>
+<br><b>(2)</b> 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/The Servant">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>The Servant/<wbr>The.Servant.1963.Serve.The.Servant.Film.Analysis.by.Ian.Christie.DVDRip.XviD.AC3.avi</a>
+<br><b>(3)</b> 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Drama/The Servant">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>The Servant/<wbr>The.Servant.1963.Theatrical.Trailer.DVDRip.XviD.AC3.avi</a>
+<span class=MDIRTIME>1257309530</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-The+Servant+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=The+Servant+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=The+Servant+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/The+Servant+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0057490">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0057490/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=The+Servant+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=The+Servant+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0061135.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0061135>The Ugly Dachshund </a></b>
+ (<span class=MYEAR>1966</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>6.3</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>93</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Drama / Family)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Fran Garrison&#x27;s all in a tizzy because her prize Dachshund, Danke, is having pups, and she has hopes of one of the pups becoming a champion. But at the vet&#x27;s, her husband Jim is talked into letting Danke wetnurse a Great Dane pup that&#x27;s been abandoned by his mother. And Jim wants to keep the Great Dane. But Brutus has this problem: he thinks he&#x27;s a dachshund and he&#x27;s too big to be a lapdog. But when Fran ridicules Brutus one too many times, Jim&#x27;s got a plan to prove to everyone (and Fran) that a great dane can be far more than just an ugly dachshund.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/risani, animirani/Disney.Collection.DVDRip.XviD-WaltDisney/The Ugly Dachshund [1966] Eng">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>risani, animirani/<wbr>Disney.Collection.DVDRip.XviD-WaltDisney/<wbr>The Ugly Dachshund [1966] Eng</a>
+<span class=MDIRTIME>1292493888</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-The+Ugly+Dachshund+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=The+Ugly+Dachshund+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=The+Ugly+Dachshund+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/The+Ugly+Dachshund+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0061135">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0061135/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=The+Ugly+Dachshund+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=The+Ugly+Dachshund+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0409459.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0409459>Varuhi </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.8</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>162</b> min &nbsp;&nbsp; <i class=MGENRE>(Action / Crime / Fantasy / Mystery / Sci-Fi / Thriller)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In a gritty and alternate 1985 the glory days of costumed vigilantes have been brought to a close by a government crackdown, but after one of the masked veterans is brutally murdered an investigation into the killer is initiated. The reunited heroes set out to prevent their own destruction, but in doing so discover a deeper and far more diabolical plot.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Fantastika/Watchmen.2009.ULTIMATE.CUT.DVDRip.XviD-NODLABS">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Fantastika/<wbr>Watchmen.2009.ULTIMATE.CUT.DVDRip.XviD-NODLABS/<wbr></a>
+<span class=MDIRTIME>1284281624</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-Varuhi+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=Varuhi+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=Varuhi+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/Varuhi+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0409459">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0409459/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=Varuhi+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=Varuhi+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-0910970.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt0910970>WALL&#xB7;E </a></b>
+ (<span class=MYEAR>2008</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>8.5</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>98</b> min &nbsp;&nbsp; <i class=MGENRE>(Animation / Adventure / Family / Romance / Sci-Fi)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+In a distant, but not so unrealistic future, where mankind has abandoned earth because it has become covered with trash from products sold by the powerful multi-national Buy N Large corporation, WALL-E, a garbage collecting robot has been left to clean up the mess. Mesmerized with trinkets of Earth&#x27;s history and show tunes, WALL-E is alone on Earth except for a sprightly pet cockroach. One day, Eve, a sleek (and dangerous) reconnaissance robot, is sent to Earth to find proof that life is once again sustainable. WALL-E falls in love with Eve. WALL-E rescues Eve from a dust storm and shows her a living plant he found amongst the rubble. Consistent with her &#x22;directive&#x22; Eve takes the plant and automatically enters a deactivated state except for a blinking green beacon. WALL-E, doesn&#x27;t understand what has happened to his new friend, but true to his love, he protects her from wind, rain, and lightning...
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/risani, animirani/WALL-E">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>risani, animirani/<wbr>WALL-E</a>
+<span class=MDIRTIME>1284281888</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-WALL&#xB7;E+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=WALL&#xB7;E+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=WALL&#xB7;E+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/WALL&#xB7;E+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt0910970">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt0910970/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=WALL&#xB7;E+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=WALL&#xB7;E+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1015246.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1015246>War Made Easy: How Presidents &#x26; Pundits Keep Spinning Us to Death </a></b>
+ (<span class=MYEAR>2007</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.8</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>73</b> min &nbsp;&nbsp; <i class=MGENRE>(Documentary)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+War Made Easy reaches into the Orwellian memory hole to expose a 50-year pattern of government deception and media spin that has dragged the United States into one war after another from Vietnam to Iraq. Narrated by actor and activist Sean Penn, the film exhumes remarkable archival footage of official distortion and exaggeration from LBJ to George W. Bush, revealing in stunning detail how the American news media have uncritically disseminated the pro-war messages of successive presidential administrations.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Tags: <span class=MTAGS>Guess</span><br>
+Location: 
+<b>(GUESSED)</b> 
+<a href="file:///media/BENDER/Video/Filmi/Dokumentarni/War.Made.Easy.2007.DVDRip.XviD-DOMiNO">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Dokumentarni/<wbr>War.Made.Easy.2007.DVDRip.XviD-DOMiNO/<wbr></a>
+<span class=MDIRTIME>1215376200</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-War+Made+Easy:+How+Presidents+&#x26;+Pundits+Keep+Spinning+Us+to+Death+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=War+Made+Easy:+How+Presidents+&#x26;+Pundits+Keep+Spinning+Us+to+Death+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=War+Made+Easy:+How+Presidents+&#x26;+Pundits+Keep+Spinning+Us+to+Death+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/War+Made+Easy:+How+Presidents+&#x26;+Pundits+Keep+Spinning+Us+to+Death+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1015246">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1015246/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=War+Made+Easy:+How+Presidents+&#x26;+Pundits+Keep+Spinning+Us+to+Death+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=War+Made+Easy:+How+Presidents+&#x26;+Pundits+Keep+Spinning+Us+to+Death+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+<tr><td>
+<table width=100% cellspacing=0 class=movietable>
+<tr>
+<td class=poster rowspan=4 width=95><img src="images/imdb-1262981.jpg"></td>
+<td class=title height=1*><b>&nbsp;
+<a class=MTITLE href=http://www.imdb.com/title/tt1262981>World&#x27;s Greatest Dad </a></b>
+ (<span class=MYEAR>2009</span>) &nbsp; <small><i></i></small>
+</td></tr>
+<tr class=moviedesc><td height=1*>
+Rating: <b class=MRATING>7.1</b> &nbsp;&nbsp; Runtime: <b class=MRUNTIME>99</b> min &nbsp;&nbsp; <i class=MGENRE>(Comedy / Drama)</i>
+</td></tr>
+<tr class=moviedesc><td class=plot><font size=-1>
+Lance Clayton is a man who has learned to settle.&#xA0; He dreamed of being a rich and famous writer, but has only managed to make it as a high school poetry teacher.&#xA0; His only son Kyle is an insufferable jackass who won&#x27;t give his father the time of day.&#xA0; He is dating Claire, the school&#x27;s adorable art teacher, but she doesn&#x27;t want to get serious -- or even acknowledge publicly that they are dating. Then, in the wake of a freak accident, Lance suffers the worst tragedy and greatest opportunity of his life. He is suddenly faced with the possibility of all the fame, fortune and popularity he ever dreamed of, if he can only live with the knowledge of how he got there.
+</td></tr>
+<tr class=moviemeta><td height=1*><font size=-2>
+Location: 
+<a href="file:///media/BENDER/Video/Filmi/Drama/World's,Greatest.Dad.2009.DvdRip.Xvid {1337x}-Moursi">/<wbr>media/<wbr>BENDER/<wbr>Video/<wbr>Filmi/<wbr>Drama/<wbr>World's,Greatest.Dad.2009.DvdRip.Xvid {1337x}-Moursi</a>
+<span class=MDIRTIME>1293455669</span>
+<br>Subtitles: 
+<a class=HOVER_BOLD href="http://opensubtitles.org/en/search2/sublanguageid-eng/moviename-World&#x27;s+Greatest+Dad+">opensubtitles.org</a>&nbsp;
+<a class=HOVER_BOLD href="http://subscene.com/filmsearch.aspx?q=World&#x27;s+Greatest+Dad+">subscene.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://podnapisi.net/ppodnapisi/search?tbsl=1&asdp=0&sJ=2&sY=&sAKA=1&sK=World&#x27;s+Greatest+Dad+">podnapisi.net</a>&nbsp;
+<a class=HOVER_BOLD href="http://divxtitles.com/World&#x27;s+Greatest+Dad+/English/any/1">divxtitles.com</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.subtitlesource.org/title/tt1262981">subtitlesource.org</a>&nbsp;
+<br>Links: 
+<a class=HOVER_BOLD href="http://www.imdb.com/title/tt1262981/trailers">Trailers</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.youtube.com/results?search_query=World&#x27;s+Greatest+Dad+">Youtube</a>&nbsp;
+<a class=HOVER_BOLD href="http://www.rottentomatoes.com/search/full_search.php?search=World&#x27;s+Greatest+Dad+">Rottentomatoes</a>&nbsp;
+</font></td></tr>
+</table><br>
+
+</td></tr>
+</table>
+<br><div align=right><font size=-2><i>Generated by 
+<a href="http://smoviecat.sf.net/">Simple Movie Catalog 1.7.1</a></i></font></div>
+</body></html>

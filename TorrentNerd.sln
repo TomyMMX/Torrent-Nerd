@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSieveLibrary", "MovieS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorrentInfoLib", "TorrentInfoLib\TorrentInfoLib.csproj", "{76B5EB27-15EF-40C8-9D12-0A87317CD161}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransmissionRPCLib", "TransmissionRPCLib\TransmissionRPCLib.csproj", "{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -27,6 +29,10 @@ Global
 		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Debug|x86.Build.0 = Debug|Any CPU
 		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Release|x86.ActiveCfg = Release|Any CPU
 		{76B5EB27-15EF-40C8-9D12-0A87317CD161}.Release|x86.Build.0 = Release|Any CPU
+		{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}.Debug|x86.Build.0 = Debug|Any CPU
+		{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}.Release|x86.Build.0 = Release|Any CPU
 		{E2738EB0-207D-43BD-9365-27981998A31F}.Debug|x86.ActiveCfg = Debug|x86
 		{E2738EB0-207D-43BD-9365-27981998A31F}.Debug|x86.Build.0 = Debug|x86
 		{E2738EB0-207D-43BD-9365-27981998A31F}.Release|x86.ActiveCfg = Release|x86

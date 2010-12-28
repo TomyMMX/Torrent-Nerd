@@ -6,7 +6,25 @@ namespace TorrentNerd
 	{
 		private global::Gtk.Notebook notebook1;
 
+		private global::Gtk.ScrolledWindow GtkScrolledWindow1;
+
+		private global::Gtk.TreeView treeview2;
+
 		private global::Gtk.Label label8;
+
+		private global::Gtk.VBox vbox2;
+
+		private global::Gtk.HBox hbox1;
+
+		private global::Gtk.Entry tbSearchTerm;
+
+		private global::Gtk.ComboBox typeCb;
+
+		private global::Gtk.Button btnSearch;
+
+		private global::Gtk.ScrolledWindow GtkScrolledWindow;
+
+		private global::Gtk.TreeView treeview1;
 
 		private global::Gtk.Label label9;
 
@@ -26,33 +44,96 @@ namespace TorrentNerd
 			this.notebook1 = new global::Gtk.Notebook ();
 			this.notebook1.CanFocus = true;
 			this.notebook1.Name = "notebook1";
-			this.notebook1.CurrentPage = 2;
+			this.notebook1.CurrentPage = 0;
+			// Container child notebook1.Gtk.Notebook+NotebookChild
+			this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
+			this.GtkScrolledWindow1.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
+			this.treeview2 = new global::Gtk.TreeView ();
+			this.treeview2.CanFocus = true;
+			this.treeview2.Name = "treeview2";
+			this.GtkScrolledWindow1.Add (this.treeview2);
+			this.notebook1.Add (this.GtkScrolledWindow1);
 			// Notebook tab
-			global::Gtk.Label w1 = new global::Gtk.Label ();
-			w1.Visible = true;
-			this.notebook1.Add (w1);
 			this.label8 = new global::Gtk.Label ();
 			this.label8.Name = "label8";
 			this.label8.LabelProp = global::Mono.Unix.Catalog.GetString ("Watch");
-			this.notebook1.SetTabLabel (w1, this.label8);
+			this.notebook1.SetTabLabel (this.GtkScrolledWindow1, this.label8);
 			this.label8.ShowAll ();
+			// Container child notebook1.Gtk.Notebook+NotebookChild
+			this.vbox2 = new global::Gtk.VBox ();
+			this.vbox2.Name = "vbox2";
+			this.vbox2.Spacing = 6;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.hbox1 = new global::Gtk.HBox ();
+			this.hbox1.Name = "hbox1";
+			this.hbox1.Spacing = 6;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.tbSearchTerm = new global::Gtk.Entry ();
+			this.tbSearchTerm.CanFocus = true;
+			this.tbSearchTerm.Name = "tbSearchTerm";
+			this.tbSearchTerm.IsEditable = true;
+			this.tbSearchTerm.InvisibleChar = '●';
+			this.hbox1.Add (this.tbSearchTerm);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.tbSearchTerm]));
+			w3.Position = 0;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.typeCb = global::Gtk.ComboBox.NewText ();
+			this.typeCb.AppendText (global::Mono.Unix.Catalog.GetString ("Movie"));
+			this.typeCb.AppendText (global::Mono.Unix.Catalog.GetString ("Series"));
+			this.typeCb.Name = "typeCb";
+			this.typeCb.Active = 0;
+			this.hbox1.Add (this.typeCb);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.typeCb]));
+			w4.Position = 1;
+			w4.Expand = false;
+			w4.Fill = false;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.btnSearch = new global::Gtk.Button ();
+			this.btnSearch.CanFocus = true;
+			this.btnSearch.Name = "btnSearch";
+			this.btnSearch.UseUnderline = true;
+			this.btnSearch.Label = global::Mono.Unix.Catalog.GetString ("Search");
+			this.hbox1.Add (this.btnSearch);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.btnSearch]));
+			w5.Position = 2;
+			w5.Expand = false;
+			w5.Fill = false;
+			this.vbox2.Add (this.hbox1);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox1]));
+			w6.Position = 0;
+			w6.Expand = false;
+			w6.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
+			this.treeview1 = new global::Gtk.TreeView ();
+			this.treeview1.CanFocus = true;
+			this.treeview1.Name = "treeview1";
+			this.GtkScrolledWindow.Add (this.treeview1);
+			this.vbox2.Add (this.GtkScrolledWindow);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.GtkScrolledWindow]));
+			w8.Position = 1;
+			this.notebook1.Add (this.vbox2);
+			global::Gtk.Notebook.NotebookChild w9 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox2]));
+			w9.Position = 1;
 			// Notebook tab
-			global::Gtk.Label w2 = new global::Gtk.Label ();
-			w2.Visible = true;
-			this.notebook1.Add (w2);
 			this.label9 = new global::Gtk.Label ();
 			this.label9.Name = "label9";
 			this.label9.LabelProp = global::Mono.Unix.Catalog.GetString ("Search");
-			this.notebook1.SetTabLabel (w2, this.label9);
+			this.notebook1.SetTabLabel (this.vbox2, this.label9);
 			this.label9.ShowAll ();
 			// Notebook tab
-			global::Gtk.Label w3 = new global::Gtk.Label ();
-			w3.Visible = true;
-			this.notebook1.Add (w3);
+			global::Gtk.Label w10 = new global::Gtk.Label ();
+			w10.Visible = true;
+			this.notebook1.Add (w10);
 			this.label10 = new global::Gtk.Label ();
 			this.label10.Name = "label10";
 			this.label10.LabelProp = global::Mono.Unix.Catalog.GetString ("Daily Suggestions");
-			this.notebook1.SetTabLabel (w3, this.label10);
+			this.notebook1.SetTabLabel (w10, this.label10);
 			this.label10.ShowAll ();
 			this.Add (this.notebook1);
 			if ((this.Child != null)) {

@@ -14,14 +14,15 @@ namespace TorrentNerd
 	class MainClass
 	{
 		private static StatusIcon trayIcon;
-		private static string busName = "org.ttsoft.torrentnerd";//"com.ttorg.torrentnerd";
+		private static string busName = "org.ttsoft.torrentnerd";	
 		private static string objectPath="/org/ttsoft/torrentnerd";
+		public static TorrentNerd.MainWindow win;
 
 		[DllImport ("libc")] // Linux
 		private static extern int prctl (int option, byte [] arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5);
 		[DllImport ("libc")] // BSD
 		private static extern void setproctitle (byte [] fmt, byte [] str_arg);
-				
+		
 		private static bool InitDBus(string path)
 		{
 			//Connection connection = Connection.Open ("tcp:host=localhost,port=8899");
@@ -52,16 +53,27 @@ namespace TorrentNerd
 		
 		public static void HandleTorrentEvent(string path)
 		{
-			Console.WriteLine(path);
+			win.Visible=true;
+			
+			if(path!=null&&path != "")
+			{
+				win.ShowDownDialog(path);
+			}
+			else
+			{
+				
+			}
 		}
 
 		public static void Main (string[] args)
 		{
-			/*try {
+			//set MONO process name
+			try {
     			SetProcessName ("TorrentNerd");
 			} catch (Exception e) {
 			    //Probably a windows machine
-			}*/	
+			}
+			
 			String path = "";
 			try {
 				path = args[0];	
@@ -71,7 +83,7 @@ namespace TorrentNerd
 			{			
 				Application.Init();
 				
-				TorrentNerd.MainWindow win = new TorrentNerd.MainWindow ();
+				win = new TorrentNerd.MainWindow ();
 				
 				trayIcon = new StatusIcon (new Pixbuf ("ico/tn.png"));
 				trayIcon.Visible = true;
@@ -79,25 +91,17 @@ namespace TorrentNerd
 				// Show/Hide the window (even from the Panel/Taskbar) when the TrayIcon has been clicked.
 				trayIcon.Activate += delegate { win.Visible = !win.Visible; };
 				
-				win.ShowAll ();					
-				
-				//download torrent
-				
-				try {
-					path = args[0];
-					win.ShowDownDialog (path);
-				} catch {
-				
-				}										
-				Application.Run();
+				win.ShowAll(path);				
+									
+				Application.Run();				
+			
 			}
 			else
-			{
-				Console.WriteLine("Instance allready running!");
-				//TODO: send path to running instance/focus window
-					
-			}
-		}
+			{				
+				//instance allready running
+			}			
+			
+		}		
 		
 		//so on linux or bsd we se TorrentNerd, not mono
 		public static void SetProcessName (string name)
@@ -116,25 +120,6 @@ namespace TorrentNerd
 		    }
 		}
 	}
-	//public delegate void NewTorrentEventHandler (string newTorrentPath);
-	/*[Interface ("com.ttorg.torrentnerd")]
-	public interface INewTorrent
-	{		
-		//event NewTorrentEventHandler NewTorrentEvent;
-		void sendPathToFirstinstance(string path);
-	}
-	
-	public interface INewT : INewTorrent {}
-	public class NewTorrentBus:INewTorrent
-	{
-		//public event NewTorrentEventHandler NewTorrentEvent;
-		public void sendPathToFirstinstance(string path)
-		{
-			if(NewTorrentEvent!=null)
-				NewTorrentEvent(path);
-			Console.WriteLine(path);
-		}
-	}*/
 	
 	[Interface ("org.ttsoft.torrentnerd")]
 	public interface INewTorrentOne

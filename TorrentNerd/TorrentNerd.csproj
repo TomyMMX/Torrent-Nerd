@@ -21,7 +21,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
-    <Commandlineparameters>"/home/tomaz/Projects/TorrentNerd/TorrentNerd/bin/Debug/Dexter S05E10 720p HDTV DD5.1 x264-Cache.torrent"</Commandlineparameters>
+    <Commandlineparameters>"/home/tomaz/Projects/TorrentNerd/TorrentNerd/bin/Debug/dvw.torrent"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -72,6 +72,10 @@
     <ProjectReference Include="..\TorrentInfoLib\TorrentInfoLib.csproj">
       <Project>{76B5EB27-15EF-40C8-9D12-0A87317CD161}</Project>
       <Name>TorrentInfoLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TransmissionRPCLib\TransmissionRPCLib.csproj">
+      <Project>{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}</Project>
+      <Name>TransmissionRPCLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -286,7 +286,7 @@ namespace TorrentNerd
 			w24.Position = 0;
 			// Container child hbox9.Gtk.Box+BoxChild
 			this.combobox1 = global::Gtk.ComboBox.NewText ();
-			this.combobox1.AppendText (global::Mono.Unix.Catalog.GetString ("Englsih"));
+			this.combobox1.AppendText (global::Mono.Unix.Catalog.GetString ("English"));
 			this.combobox1.AppendText (global::Mono.Unix.Catalog.GetString ("Slovenian"));
 			this.combobox1.Name = "combobox1";
 			this.combobox1.Active = 0;
@@ -374,6 +374,7 @@ namespace TorrentNerd
 			this.DefaultWidth = 500;
 			this.DefaultHeight = 630;
 			this.Show ();
+			this.btnLink.Clicked += new global::System.EventHandler (this.openImdbLink);
 			this.combobox1.Changed += new global::System.EventHandler (this.languageChanged);
 			this.btnPath.Clicked += new global::System.EventHandler (this.OnBtnPathClicked);
 			this.btnDownload.Clicked += new global::System.EventHandler (this.btnDownload_Clicked);
