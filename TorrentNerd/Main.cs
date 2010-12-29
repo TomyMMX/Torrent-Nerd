@@ -8,6 +8,8 @@ using System.Text;
 using NDesk.DBus;
 using GLib;
 using org.freedesktop.DBus;
+using System.IO;
+using DBWorkers;
 
 namespace TorrentNerd
 {
@@ -90,6 +92,9 @@ namespace TorrentNerd
 				
 				// Show/Hide the window (even from the Panel/Taskbar) when the TrayIcon has been clicked.
 				trayIcon.Activate += delegate { win.Visible = !win.Visible; };
+				
+				if(!File.Exists("TorrentNerd.sqlite"))
+					DBLogic.createSqliteSchema();			
 				
 				win.ShowAll(path);				
 									

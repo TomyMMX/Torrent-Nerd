@@ -6,6 +6,7 @@ namespace TorrentInfoLib
 			Movie,
 			Series
 		};
+		
 		public string Name{set;get;}
 		public string Release{set;get;}
 		public Mediatype Type{set;get;}
@@ -18,6 +19,7 @@ namespace TorrentInfoLib
 		public double ImdbRating{set;get;}
 		public string ImdbPosterLink{set;get;}
 		public string ImdbPlot{set;get;}
+		public string torrentid{set;get;}
 	}
 
 	public static class TorentInfo

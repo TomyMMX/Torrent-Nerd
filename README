@@ -1,9 +1,10 @@
 Torrent Nerd 
 Middleware for media torrent downloading.
 Oppening a torrent with Torrent Nerd (if it is a torrent of a movie or series) shows the
-basic imdb data for the content and available subtitles on a well known subtitle site. <- this part works
+basic data (and rating) for the content and available subtitles on a well known subtitle site. <- this part works
 
 The first release will also include interoperability with transmission and uTorrent, so the downloaded files get unpacked
 (if rar-ed) and the .avi and subtitle files get copied together so everithing can be played with no hassle for the user.
+If we have multiple media files the app tries to guess the order and generates an appropriate playlist (compatible with VLC... others to come).
 
 TomyMMX

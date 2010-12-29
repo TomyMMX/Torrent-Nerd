@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TorrentNerd</RootNamespace>
     <AssemblyName>TorrentNerd</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,6 +77,10 @@
       <Project>{906F1DB5-6F57-4031-93BB-ECBBB218DF7E}</Project>
       <Name>TransmissionRPCLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBWorkers\DBWorkers.csproj">
+      <Project>{3F793BA5-4D4F-4E58-834F-071786F7EB46}</Project>
+      <Name>DBWorkers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico\tn.png">
@@ -85,5 +89,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ico\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bin\sqlite3.dll">
+      <Link>sqlite3.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

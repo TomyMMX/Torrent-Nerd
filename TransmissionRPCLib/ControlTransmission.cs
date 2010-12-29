@@ -44,17 +44,8 @@ namespace TransmissionRPCLib
 			{
 				if(sid==null&&readSessionId(e))
 					 makeRequest(postData);
-			}
-			
+			}			
 			return "";
-		}
-		
-		private string addArgument(string argname, string argVal, string inputlink)
-		{
-			string argSchablone="&{0}={1}";
-			argSchablone=string.Format(argSchablone, argname, argVal);
-			
-			return inputlink+argSchablone;
 		}
 		
 		public string addTorrent(string savePath, string torrentPath)

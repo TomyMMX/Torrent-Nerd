@@ -8,6 +8,7 @@ namespace TorrentNerd
 {
 	public partial class ChooseSubAndLocationDialog : Gtk.Dialog
 	{
+		public delegate void TorrentAddedToDownload();
 		private SubtitleDownloaderLib.XmlResultsReader xrr;
 		private TorrentInfoLib.TorrentData td;
 		private string path;
@@ -19,7 +20,10 @@ namespace TorrentNerd
 			
 			if (!path.Equals ("")) {
 				this.path = path;
+				
+				//get all the necesary data form the file, imdb and podnapisi.net
 				td = TorrentInfoLib.TorentInfo.getData (path);
+				
 				lblRating.Text = td.ImdbRating + "/10";
 				lblVotes.Text = td.ImdbVotes.ToString ();
 				btnLink.Label = td.ImdbLink;
@@ -97,7 +101,7 @@ namespace TorrentNerd
 				if (sd != null && xrr.resultsList.Count != 0) {
 					subDownloadLink = xrr.getDownloadLink (sd.DownloadPageLink);
 					
-					string subsDownPath = btnPath.Label + "/" + td.Release + "/TNSubs";
+					string subsDownPath = btnPath.Label + "/" + td.Release + "/subs";
 					
 					if (!DownloadAndUnzip.doDownload (subDownloadLink, subsDownPath))
 						MessageBox.Show ("Could not download subtitle!");
@@ -106,10 +110,29 @@ namespace TorrentNerd
 			} catch {
 			}
 			
-			//executeTorrentProgram (path);
-			//TODO read settings and open correct app
-			TransmissionRPCLib.ControlTransmission ct = new TransmissionRPCLib.ControlTransmission("127.0.0.1", "9091");
-			ct.addTorrent(btnPath.Label, path);
+			string [] settings = null;
+			
+			try{
+				settings = DBWorkers.DBLogic.getConfig();		
+			}
+			catch(Exception ex)
+			{
+				//default setting values if not in db
+				settings=new string[3];
+				settings[0]="transmission";
+				settings[1]="127.0.0.1";
+				settings[2]="9091";
+			}
+			if(settings[0].ToLower().Equals("transmission"))
+			{
+				TransmissionRPCLib.ControlTransmission ct = new TransmissionRPCLib.ControlTransmission(settings[1], settings[2]);
+				
+				ct.addTorrent(btnPath.Label, path);
+			}
+			else if(settings[0].ToLower().Equals("utorrent"))
+			{
+				//TODO: send torernt path and download dir to utorrent app
+			}
 			
 			this.Respond(ResponseType.Ok);
 		}
@@ -131,25 +154,6 @@ namespace TorrentNerd
 			fcd.Destroy ();
 		}
 
-		private void executeTorrentProgram (string path)
-		{
-			System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo ("transmission-gtk", "\"" + path + "\"");
-			
-			// The following commands are needed to redirect the standard output.
-			// This means that it will be redirected to the Process.StandardOutput StreamReader.
-			procStartInfo.RedirectStandardOutput = false;
-			procStartInfo.UseShellExecute = false;
-			// Do not create the black window.
-			procStartInfo.CreateNoWindow = false;
-			// Now we create a process, assign its ProcessStartInfo and start it
-			System.Diagnostics.Process proc = new System.Diagnostics.Process ();
-			proc.StartInfo = procStartInfo;
-			try {
-				proc.Start ();
-			} catch (Exception ex) {
-				path = "";
-			}
-		}
 		protected virtual void languageChanged (object sender, System.EventArgs e)
 		{
 			if(language=="2")

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>TransmissionRPCLib</RootNamespace>
     <AssemblyName>TransmissionRPCLib</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
